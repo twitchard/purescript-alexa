@@ -11,6 +11,8 @@ module Web.Amazon.Alexa
   , AlexaError
   , AlexaApplication
   , AlexaUser
+
+  , AlexaResponse
   ) where
 
 import Prelude
