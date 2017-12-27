@@ -43,7 +43,7 @@ type AlexaUser = {} -- TODO
 data AlexaRequest
   = LaunchRequest { request :: AlexaLaunchRequest | AlexaBody }
   | IntentRequest { request :: AlexaIntentRequest | AlexaBody }
-  | AlexaSessionEndedRequest { request :: AlexaSessionEndedRequest | AlexaBody }
+  | SessionEndedRequest { request :: AlexaSessionEndedRequest | AlexaBody }
   -- | TODO AlexaAudioPlayer...
   -- | TODO AlexaVideoApp...
   -- | TODO PlaybackController...
@@ -86,7 +86,7 @@ instance rfAlexaRequest :: ReadForeign AlexaRequest where
       readByType f' req
         | req.type == "LaunchRequest"       = (map LaunchRequest) $ read f'
         | req.type == "IntentRequest"       = (map IntentRequest) $ read f'
-        | req.type == "SessionEndedRequest" = (map AlexaSessionEndedRequest) $ read f' 
+        | req.type == "SessionEndedRequest" = (map SessionEndedRequest) $ read f' 
         | otherwise = fail <<< ForeignError $ "Unknown type " <> req.type
 
 -- RESPONSE TYPES
