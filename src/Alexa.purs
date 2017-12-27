@@ -95,16 +95,16 @@ type AlexaResponse a =
   { version :: String
   , sessionAttributes :: a
   , response ::
-    { outputSpeech ::
+    { outputSpeech :: Maybe
       { type :: String
       , text :: String
       }
-    , card ::
+    , card :: Maybe
       { type :: String
       , title :: String
       , content :: String
       }
-    , reprompt ::
+    , reprompt :: Maybe
       { outputSpeech ::
         { type :: String
         , text :: String
