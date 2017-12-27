@@ -7,6 +7,9 @@ import Type.Data.Symbol (SProxy(..))
 _response :: ∀ r a. Lens' { response :: a | r} a
 _response = prop (SProxy :: SProxy "response")
 
+_sessionAttributes:: ∀ r a. Lens' { sessionAttributes :: a | r} a
+_sessionAttributes = prop (SProxy :: SProxy "sessionAttributes")
+
 _outputSpeech :: ∀ r a. Lens' { outputSpeech :: a | r} a
 _outputSpeech = prop (SProxy :: SProxy "outputSpeech")
 
