@@ -93,7 +93,6 @@ instance rfAlexaRequest :: ReadForeign AlexaRequest where
 type AlexaResponse a =
   { version :: String
   , sessionAttributes :: a
-  , shouldEndSession :: Boolean
   , response ::
     { outputSpeech :: Maybe
       { type :: String
@@ -110,5 +109,6 @@ type AlexaResponse a =
         , text :: String
         }
       }
+    , shouldEndSession :: Boolean
     }
   }
