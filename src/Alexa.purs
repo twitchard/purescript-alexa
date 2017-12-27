@@ -89,7 +89,6 @@ instance rfAlexaRequest :: ReadForeign AlexaRequest where
         | req.type == "SessionEndedRequest" = (map AlexaSessionEndedRequest) $ read f' 
         | otherwise = fail <<< ForeignError $ "Unknown type " <> req.type
 
-
 -- RESPONSE TYPES
 type AlexaResponse a =
   { version :: String
