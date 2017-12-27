@@ -82,12 +82,12 @@ type AlexaError =
 instance rfAlexaRequest :: ReadForeign AlexaRequest where
   readImpl f = read f >>= readByType f 
     where
-      readByType :: Foreign → {type :: String} → F AlexaRequest
-      readByType f' req
-        | req.type == "LaunchRequest"       = (map LaunchRequest) $ read f'
-        | req.type == "IntentRequest"       = (map IntentRequest) $ read f'
-        | req.type == "SessionEndedRequest" = (map SessionEndedRequest) $ read f' 
-        | otherwise = fail <<< ForeignError $ "Unknown type " <> req.type
+      readByType :: Foreign → {request :: {type :: String}} → F AlexaRequest
+      readByType f' event
+        | event.request.type == "LaunchRequest"       = (map LaunchRequest) $ read f'
+        | event.request.type == "IntentRequest"       = (map IntentRequest) $ read f'
+        | event.request.type == "SessionEndedRequest" = (map SessionEndedRequest) $ read f' 
+        | otherwise = fail <<< ForeignError $ "Unknown type " <> event.request.type
 
 -- RESPONSE TYPES
 type AlexaResponse a =
