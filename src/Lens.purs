@@ -13,6 +13,9 @@ _sessionAttributes = prop (SProxy :: SProxy "sessionAttributes")
 _outputSpeech :: ∀ r a. Lens' { outputSpeech :: a | r} a
 _outputSpeech = prop (SProxy :: SProxy "outputSpeech")
 
+_reprompt :: ∀ r a. Lens' { reprompty :: a | r} a
+_reprompt = prop (SProxy :: SProxy "reprompt")
+
 _shouldEndSession :: ∀ r. Lens' { shouldEndSession :: Boolean | r} Boolean
 _shouldEndSession = prop (SProxy :: SProxy "shouldEndSession")
 
