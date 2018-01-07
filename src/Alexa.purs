@@ -48,6 +48,7 @@ data AlexaRequest
   -- | TODO AlexaVideoApp...
   -- | TODO PlaybackController...
 
+
 type AlexaRequestCommon =
   ( requestId :: String
   , timestamp :: String
