@@ -38,7 +38,11 @@ type AlexaBody =
 
 type AlexaContext = {} -- TODO
 type AlexaApplication = {} -- TODO
-type AlexaUser = {} -- TODO
+type AlexaUser =
+  { userId :: String
+  , accessToken :: Maybe String
+  -- , permissions :: TODO
+  }
 
 data AlexaRequest
   = LaunchRequest { request :: AlexaLaunchRequest | AlexaBody }
