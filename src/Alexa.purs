@@ -69,13 +69,13 @@ type AlexaIntentRequest =
 
 type AlexaSessionEndedRequest =
   { reason :: String
-  , error :: AlexaError
+  , error :: Maybe AlexaError
   | AlexaRequestCommon
   }
 
 type AlexaIntent =
   { name :: String
-  , confirmationStatus :: String
+  , confirmationStatus :: Maybe String
   , slots :: Foreign
   }
 
