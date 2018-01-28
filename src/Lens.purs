@@ -3,9 +3,13 @@ module Web.Amazon.Alexa.Lens where
 import Data.Lens (Lens', lens)
 import Data.Lens.Record (prop)
 import Type.Data.Symbol (SProxy(..))
-import Web.Amazon.Alexa (AlexaBody, AlexaRequest(..))
+import Web.Amazon.Alexa.Types (AlexaRequest(..), AlexaSession, AlexaContext)
 
-_body :: Lens' AlexaRequest {|AlexaBody}
+_body :: Lens' AlexaRequest
+  { version :: String
+  , session :: AlexaSession
+  , context :: AlexaContext
+  }
 _body = lens get set
   where
     get (LaunchRequest r) =

@@ -1,17 +1,14 @@
-module Web.Amazon.Alexa
+module Web.Amazon.Alexa.Types
   ( AlexaRequest (..)
   , AlexaLaunchRequest
-  , AlexaBody
   , AlexaIntentRequest
   , AlexaSessionEndedRequest
-  , AlexaRequestCommon
   , AlexaSession
   , AlexaContext
   , AlexaIntent
   , AlexaError
   , AlexaApplication
   , AlexaUser
-
   , AlexaResponse
   ) where
 
@@ -30,12 +27,6 @@ type AlexaSession =
   , user :: AlexaUser
   }
 
-type AlexaBody =
-  ( version :: String
-  , session :: AlexaSession
-  , context :: AlexaContext
-  )
-
 type AlexaContext = {} -- TODO
 type AlexaApplication = {} -- TODO
 type AlexaUser =
@@ -45,32 +36,45 @@ type AlexaUser =
   }
 
 data AlexaRequest
-  = LaunchRequest { request :: AlexaLaunchRequest | AlexaBody }
-  | IntentRequest { request :: AlexaIntentRequest | AlexaBody }
-  | SessionEndedRequest { request :: AlexaSessionEndedRequest | AlexaBody }
-  -- | TODO AlexaAudioPlayer...
-  -- | TODO AlexaVideoApp...
-  -- | TODO PlaybackController...
+  = LaunchRequest
+      { request :: AlexaLaunchRequest
+      , version :: String
+      , session :: AlexaSession
+      , context :: AlexaContext
+      }
+  | IntentRequest
+      { request :: AlexaIntentRequest
+      , version :: String
+      , session :: AlexaSession
+      , context :: AlexaContext
+      }
+  | SessionEndedRequest
+      { request :: AlexaSessionEndedRequest
+      , version :: String
+      , session :: AlexaSession
+      , context :: AlexaContext
+      }
 
-
-type AlexaRequestCommon =
-  ( requestId :: String
+type AlexaLaunchRequest =
+  { requestId :: String
   , timestamp :: String
   , locale :: String
-  )
-
-type AlexaLaunchRequest = {|AlexaRequestCommon}
+  }
 
 type AlexaIntentRequest = 
   { dialogState :: Maybe String
   , intent :: AlexaIntent
-  | AlexaRequestCommon
+  , requestId :: String
+  , timestamp :: String
+  , locale :: String
   }
 
 type AlexaSessionEndedRequest =
   { reason :: String
   , error :: Maybe AlexaError
-  | AlexaRequestCommon
+  , requestId :: String
+  , timestamp :: String
+  , locale :: String
   }
 
 type AlexaIntent =
