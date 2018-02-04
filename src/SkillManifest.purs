@@ -1,5 +1,6 @@
 module Amazon.Alexa.Skill.Manifest where
 
+import Data.Foreign.NullOrUndefined (NullOrUndefined)
 import Data.Maybe (Maybe)
 import Data.StrMap (StrMap)
 
@@ -42,8 +43,8 @@ type Permission = {} -- TODO
 type Subscription = { eventName :: String }
 
 type Endpoint = 
-  { uri :: Maybe String
-  , sourceDir :: Maybe String
+  { uri :: NullOrUndefined String
+  , sourceDir :: NullOrUndefined String
   }
 
 type LocalePrivacy = 
