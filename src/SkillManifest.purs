@@ -4,7 +4,7 @@ import Data.Maybe (Maybe)
 import Data.StrMap (StrMap)
 
 type Manifest =
-  { manifest :: 
+  { skillManifest :: 
     { publishingInformation ::
       { locales :: StrMap Locale
       , isAvailableWorldWide :: Boolean
