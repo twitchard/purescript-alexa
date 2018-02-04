@@ -12,21 +12,21 @@ type Manifest =
       , category :: String
       , distributionCountries :: Array String
       }
+    , apis :: { custom :: { endpoint :: Endpoint } } 
+    , manifestVersion :: String
+    , permissions :: Array Permission
+    , privacyAndCompliance ::
+      { allowsPurchases :: Boolean
+      , usesPersonalInfo :: Boolean
+      , isChildDirected :: Boolean
+      , isExportCompliant :: Boolean
+      , containsAds :: Boolean
+      , locales :: StrMap LocalePrivacy
+      }
+    , events :: Maybe { endpoint :: Endpoint }
+    , subscriptions :: Array Subscription
+    , regions :: StrMap Endpoint
     }
-  , apis :: { custom :: { endpoint :: Endpoint } } 
-  , manifestVersion :: String
-  , permissions :: Array Permission
-  , privacyAndCompliance ::
-    { allowsPurchases :: Boolean
-    , usesPersonalInfo :: Boolean
-    , isChildDirected :: Boolean
-    , isExportCompliant :: Boolean
-    , containsAds :: Boolean
-    , locales :: StrMap LocalePrivacy
-    }
-  , events :: Maybe { endpoint :: Endpoint }
-  , subscriptions :: Array Subscription
-  , regions :: StrMap Endpoint
   }
 
 type Locale =
