@@ -10,7 +10,7 @@ module Web.Amazon.Alexa.Types
   , AlexaApplication
   , AlexaUser
   , AlexaResponse
-  , BuiltInIntent
+  , BuiltInIntent (..)
   , readBuiltInIntent
   ) where
 
