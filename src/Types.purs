@@ -10,6 +10,8 @@ module Web.Amazon.Alexa.Types
   , AlexaApplication
   , AlexaUser
   , AlexaResponse
+  , BuiltInIntent
+  , readBuiltInIntent
   ) where
 
 import Prelude
