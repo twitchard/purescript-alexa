@@ -15,8 +15,45 @@ module Web.Amazon.Alexa.Types
 import Prelude
 
 import Data.Foreign (Foreign, ForeignError(..), F, fail)
-import Data.Maybe (Maybe)
+import Data.Maybe (Maybe(..))
 import Simple.JSON (class ReadForeign, read)
+
+data BuiltInIntent
+  = AmazonCancelIntent
+  | AmazonHelpIntent
+  | AmazonLoopOffIntent
+  | AmazonLoopOnIntent
+  | AmazonNextIntent
+  | AmazonNoIntent
+  | AmazonPauseIntent
+  | AmazonPreviousIntent
+  | AmazonRepeatIntent
+  | AmazonResumeIntent
+  | AmazonShuffleOffIntent
+  | AmazonShuffleOnIntent
+  | AmazonStartOverIntent
+  | AmazonStopIntent
+  | AmazonYesIntent
+
+readBuiltInIntent :: String → Maybe BuiltInIntent
+readBuiltInIntent s
+  | s == "AMAZON.CancelIntent"     = Just AmazonCancelIntent
+  | s == "AMAZON.HelpIntent"       = Just AmazonHelpIntent
+  | s == "AMAZON.LoopOffIntent"    = Just AmazonLoopOffIntent
+  | s == "AMAZON.LoopOnIntent"     = Just AmazonLoopOnIntent
+  | s == "AMAZON.NextIntent"       = Just AmazonNextIntent
+  | s == "AMAZON.NoIntent"         = Just AmazonNoIntent
+  | s == "AMAZON.PauseIntent"      = Just AmazonPauseIntent
+  | s == "AMAZON.PreviousIntent"   = Just AmazonPreviousIntent
+  | s == "AMAZON.RepeatIntent"     = Just AmazonRepeatIntent
+  | s == "AMAZON.ResumeIntent"     = Just AmazonResumeIntent
+  | s == "AMAZON.ShuffleOffIntent" = Just AmazonShuffleOffIntent
+  | s == "AMAZON.ShuffleOnIntent"  = Just AmazonShuffleOnIntent
+  | s == "AMAZON.StartOverIntent"  = Just AmazonStartOverIntent
+  | s == "AMAZON.StopIntent"       = Just AmazonStopIntent
+  | s == "AMAZON.YesIntent"        = Just AmazonYesIntent
+  | otherwise = Nothing
+
 
 -- REQUEST TYPES
 type AlexaSession =
