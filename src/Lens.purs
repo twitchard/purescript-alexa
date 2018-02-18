@@ -1,3 +1,5 @@
+-- | This module defines a collections of Lenses for convenience in accessing
+-- | deeply nested properties inside an AlexaRequest
 module Web.Amazon.Alexa.Lens where
 
 import Data.Lens (Lens', lens)
@@ -5,32 +7,14 @@ import Data.Lens.Record (prop)
 import Type.Data.Symbol (SProxy(..))
 import Web.Amazon.Alexa.Types (AlexaRequest(..), AlexaSession, AlexaContext)
 
+-- | The 'body' of an AlexaResponse contains those properties shared
+-- | by all types of requests
 _body :: Lens' AlexaRequest
   { version :: String
   , session :: AlexaSession
   , context :: AlexaContext
   }
 _body = lens get set
-  where
-    get (LaunchRequest r) =
-      { version: r.version
-      , session: r.session
-      , context: r.context
-      }
-    get (IntentRequest r) = 
-      { version: r.version
-      , session: r.session
-      , context: r.context
-      }
-    get (SessionEndedRequest r) =
-      { version: r.version
-      , session: r.session
-      , context: r.context
-      }
-    
-    set (LaunchRequest r) s = LaunchRequest (r
-      { version = s.version
-      , session = s.session
       , context = s.context
       })
     set (IntentRequest r) s = IntentRequest (r
