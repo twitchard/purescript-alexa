@@ -15,6 +15,26 @@ _body :: Lens' AlexaRequest
   , context :: AlexaContext
   }
 _body = lens get set
+  where
+    get (LaunchRequest r) =
+      { version: r.version
+      , session: r.session
+      , context: r.context
+      }
+    get (IntentRequest r) =
+      { version: r.version
+      , session: r.session
+      , context: r.context
+      }
+    get (SessionEndedRequest r) =
+      { version: r.version
+      , session: r.session
+      , context: r.context
+      }
+
+    set (LaunchRequest r) s = LaunchRequest (r
+      { version = s.version
+      , session = s.session
       , context = s.context
       })
     set (IntentRequest r) s = IntentRequest (r
