@@ -1,4 +1,4 @@
-module Web.Amazon.Alexa.Types
+module Amazon.Alexa.Types
   ( AlexaRequest (..)
   , AlexaLaunchRequest
   , AlexaIntentRequest

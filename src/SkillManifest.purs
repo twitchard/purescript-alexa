@@ -1,4 +1,4 @@
-module Amazon.Alexa.Skill.Manifest where
+module Amazon.Alexa.Manifest where
 
 import Data.Foreign.NullOrUndefined (NullOrUndefined)
 import Data.StrMap (StrMap)

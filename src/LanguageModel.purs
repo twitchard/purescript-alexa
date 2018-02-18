@@ -1,4 +1,4 @@
-module Amazon.Alexa.Skill.LanguageModel where
+module Amazon.Alexa.LanguageModel where
 
 -- | LanguageModel is the type of the object that you provide to Amazon
 -- | in order to define the voice interface or

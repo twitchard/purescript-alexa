@@ -1,11 +1,11 @@
 -- | This module defines a collections of Lenses for convenience in accessing
 -- | deeply nested properties inside an AlexaRequest
-module Web.Amazon.Alexa.Lens where
+module Amazon.Alexa.Lens where
 
 import Data.Lens (Lens', lens)
 import Data.Lens.Record (prop)
 import Type.Data.Symbol (SProxy(..))
-import Web.Amazon.Alexa.Types (AlexaRequest(..), AlexaSession, AlexaContext)
+import Amazon.Alexa.Types (AlexaRequest(..), AlexaSession, AlexaContext)
 
 -- | The 'body' of an AlexaResponse contains those properties shared
 -- | by all types of requests
