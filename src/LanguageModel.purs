@@ -54,6 +54,7 @@ module Amazon.Alexa.Skill.LanguageModel where
 -- | and you may also define your own slot types by defining them inside
 -- | the 'types' array in your language model. For example
 -- | 
+-- | ```
 -- | "types": [
 -- |   {
 -- |     "name": "ProgrammingLanguage",
@@ -72,7 +73,9 @@ module Amazon.Alexa.Skill.LanguageModel where
 -- |       },
 -- |       ...
 -- |     ]
--- |  }
+-- |   }
+-- | ]
+-- | ```
 -- |
 -- | Alexa will use the values of your slot types as hints, but will not
 -- | consider them to be exhaustive. Alexa might very well invoke your
