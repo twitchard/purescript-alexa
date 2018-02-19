@@ -11,14 +11,20 @@ module Amazon.Alexa.Types
   , AlexaUser
   , AlexaResponse
   , BuiltInIntent (..)
+  , Speech
+  , Card
   , readBuiltInIntent
   ) where
 
 import Prelude
 
 import Data.Foreign (Foreign, ForeignError(..), F, fail)
+import Data.Generic.Rep (class Generic)
+import Data.Generic.Rep.Eq (genericEq)
+import Data.Generic.Rep.Show (genericShow)
 import Data.Maybe (Maybe(..))
-import Simple.JSON (class ReadForeign, read)
+import Data.Newtype (class Newtype)
+import Simple.JSON (class ReadForeign, class WriteForeign, read, write)
 
 type AlexaSession =
   { new :: Boolean
@@ -176,21 +182,47 @@ type AlexaResponse a =
   { version :: String
   , sessionAttributes :: a
   , response ::
-    { outputSpeech :: Maybe
-      { type :: String
-      , text :: String
-      }
-    , card :: Maybe
-      { type :: String
-      , title :: String
-      , content :: String
-      }
-    , reprompt :: Maybe
-      { outputSpeech ::
-        { type :: String
-        , text :: String
-        }
-      }
+    { outputSpeech :: Maybe Speech
+    , card :: Maybe Card
+    , reprompt :: Maybe { outputSpeech :: Speech }
     , shouldEndSession :: Boolean
     }
   }
+
+data Speech
+  = Text String
+  | SSML String
+
+derive instance genericSpeech :: Generic Speech _
+instance eqSpeech :: Eq Speech where
+  eq = genericEq
+instance showSpeech :: Show Speech where
+  show = genericShow
+
+instance wfSpeech :: WriteForeign Speech where
+  writeImpl (Text s) = write { type : "PlainText", text : s }
+  writeImpl (SSML s) = write { type : "SSML", text : s }
+
+newtype Card = Card
+  { type :: CardType
+  , title :: String
+  , content :: String
+  }
+
+data CardType = Simple | Standard | LinkAccount
+derive instance genericCardType :: Generic CardType _
+instance showCardType :: Show CardType where
+  show = genericShow
+instance eqCardType :: Eq CardType where
+  eq = genericEq
+instance wfCardType :: WriteForeign CardType where
+  writeImpl Simple = write "Simple"
+  writeImpl Standard = write "Standard"
+  writeImpl LinkAccount = write "LinkAccount"
+
+derive instance newtypeCard :: Newtype Card _
+derive instance genericCard :: Generic Card _
+instance showCard :: Show Card where
+  show = genericShow
+instance eqCard :: Eq Card where
+  eq = genericEq
