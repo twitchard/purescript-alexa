@@ -11,8 +11,9 @@ module Amazon.Alexa.Types
   , AlexaUser
   , AlexaResponse
   , BuiltInIntent (..)
-  , Speech
+  , Speech (..)
   , Card
+  , CardType (..)
   , readBuiltInIntent
   ) where
 
