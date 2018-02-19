@@ -227,3 +227,5 @@ instance showCard :: Show Card where
   show = genericShow
 instance eqCard :: Eq Card where
   eq = genericEq
+instance wfCard :: WriteForeign Card where
+  writeImpl (Card c) = write c
