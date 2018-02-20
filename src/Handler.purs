@@ -1,4 +1,8 @@
-module Amazon.Alexa.Handler where
+module Amazon.Alexa.Handler
+  ( makeHandler
+  , Handler
+  )
+  where
 
 import Prelude
 
@@ -31,9 +35,7 @@ foreign import null :: Foreign
 -- |   return callback(null, "Return this string")
 -- | }
 -- | ```
-makeHandler :: forall eff.
-  (Foreign → Foreign → (Aff eff Foreign)) →
-  EffFn3 eff Foreign Foreign (EffFn2 eff (Nullable Error) Foreign Unit) (Fiber eff Unit)
+makeHandler :: forall eff. (Foreign → Foreign → (Aff eff Foreign)) → Handler eff
 makeHandler fn = mkEffFn3 fn'
   where
     fn' event ctx callback = launchAff do
@@ -42,3 +44,5 @@ makeHandler fn = mkEffFn3 fn'
         Left err → liftEff $ runEffFn2 callback (toNullable (Just err)) null
         Right val → liftEff $ runEffFn2 callback (toNullable Nothing) val
       pure unit
+
+type Handler eff = EffFn3 eff Foreign Foreign (EffFn2 eff (Nullable Error) Foreign Unit) (Fiber eff Unit)
