@@ -7,7 +7,6 @@ type Manifest =
   { skillManifest :: 
     { publishingInformation ::
       { locales :: StrMap Locale
-      , isAvailableWorldWide :: Boolean
       , testingInstructions :: String
       , category :: String
       , distributionCountries :: Array String
