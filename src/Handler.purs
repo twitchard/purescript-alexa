@@ -10,11 +10,9 @@ import Control.Monad.Aff (Aff, Error, Fiber, attempt, launchAff)
 import Control.Monad.Eff.Class (liftEff)
 import Control.Monad.Eff.Uncurried (EffFn2, EffFn3, mkEffFn3, runEffFn2)
 import Data.Either (Either(..))
-import Data.Foreign (Foreign)
+import Data.Foreign (Foreign, toForeign)
 import Data.Maybe (Maybe(..))
 import Data.Nullable (Nullable, toNullable)
-
-foreign import null :: Foreign
 
 -- | Converts a curried function to produce an
 -- | uncurried function of the form expected by
@@ -41,7 +39,7 @@ makeHandler fn = mkEffFn3 fn'
     fn' event ctx callback = launchAff do
       result <- attempt (fn event ctx)
       case result of
-        Left err → liftEff $ runEffFn2 callback (toNullable (Just err)) null
+        Left err → liftEff $ runEffFn2 callback (toNullable (Just err)) (toForeign (toNullable Nothing))
         Right val → liftEff $ runEffFn2 callback (toNullable Nothing) val
       pure unit
 
