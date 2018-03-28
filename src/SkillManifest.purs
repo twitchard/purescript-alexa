@@ -11,7 +11,12 @@ type Manifest =
       , category :: String
       , distributionCountries :: Array String
       }
-    , apis :: { custom :: { endpoint :: Endpoint } } 
+    , apis ::
+      { custom ::
+        { endpoint :: Endpoint
+        , interfaces :: Maybe (Array { "type" :: String })
+        }
+      } 
     , manifestVersion :: String
     , permissions :: Array Permission
     , privacyAndCompliance ::
