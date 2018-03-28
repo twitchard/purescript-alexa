@@ -1,6 +1,7 @@
 module Amazon.Alexa.Manifest where
 
 import Data.Foreign.NullOrUndefined (NullOrUndefined)
+import Data.Maybe (Maybe)
 import Data.StrMap (StrMap)
 
 type Manifest =
