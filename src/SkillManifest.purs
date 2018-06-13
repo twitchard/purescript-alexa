@@ -1,12 +1,12 @@
 module Amazon.Alexa.Manifest where
 
 import Data.Maybe (Maybe)
-import Data.Map (Map)
+import Foreign.Object (Object)
 
 type Manifest =
   { skillManifest :: 
     { publishingInformation ::
-      { locales :: Map String Locale
+      { locales :: Object Locale
       , testingInstructions :: String
       , category :: String
       , distributionCountries :: Array String
@@ -25,11 +25,11 @@ type Manifest =
       , isChildDirected :: Boolean
       , isExportCompliant :: Boolean
       , containsAds :: Boolean
-      , locales :: Map String LocalePrivacy
+      , locales :: Object LocalePrivacy
       }
     , events :: Maybe { endpoint :: Endpoint }
     , subscriptions :: Array Subscription
-    , regions :: Map String Endpoint
+    , regions :: Object Endpoint
     }
   }
 
