@@ -1,25 +1,9 @@
 module Test.Main where
 
 import Prelude
+import Control.Monad.Eff (Eff)
+import Control.Monad.Eff.Console (CONSOLE, log)
 
-import Data.Generic.Rep (class Generic)
-import Data.Int (fromString)
-import Data.Maybe (Maybe)
-import EasyAlexa (class Slot)
-
-data Input
-  = Cancel
-  | Increment { otherNumber :: Maybe IntSlot }
-
-derive instance genericInput :: Generic Input _
-
-newtype IntSlot = IntSlot Int
-
-instance slotIntSlot :: Slot IntSlot where 
-  parseSlot = map IntSlot <<< fromString
-  name _ = "int"
-  slotValues _ =
-    [ { value : "one"
-      , synonyms : []
-      }
-    ]
+main :: forall e. Eff (console :: CONSOLE | e) Unit
+main = do
+  log "You should add some tests."
