@@ -1,13 +1,12 @@
 module Amazon.Alexa.Manifest where
 
-import Data.Foreign.NullOrUndefined (NullOrUndefined)
 import Data.Maybe (Maybe)
-import Data.StrMap (StrMap)
+import Data.Map (Map)
 
 type Manifest =
   { skillManifest :: 
     { publishingInformation ::
-      { locales :: StrMap Locale
+      { locales :: Map String Locale
       , testingInstructions :: String
       , category :: String
       , distributionCountries :: Array String
@@ -26,11 +25,11 @@ type Manifest =
       , isChildDirected :: Boolean
       , isExportCompliant :: Boolean
       , containsAds :: Boolean
-      , locales :: StrMap LocalePrivacy
+      , locales :: Map String LocalePrivacy
       }
-    , events :: NullOrUndefined { endpoint :: Endpoint }
+    , events :: Maybe { endpoint :: Endpoint }
     , subscriptions :: Array Subscription
-    , regions :: StrMap Endpoint
+    , regions :: Map String Endpoint
     }
   }
 
@@ -47,8 +46,8 @@ type Permission = {} -- TODO
 type Subscription = { eventName :: String }
 
 type Endpoint = 
-  { uri :: NullOrUndefined String
-  , sourceDir :: NullOrUndefined String
+  { uri :: Maybe String
+  , sourceDir :: Maybe String
   }
 
 type LocalePrivacy = 

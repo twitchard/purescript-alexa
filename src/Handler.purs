@@ -6,13 +6,13 @@ module Amazon.Alexa.Handler
 
 import Prelude
 
-import Control.Monad.Aff (Aff, Error, Fiber, attempt, launchAff)
-import Control.Monad.Eff.Class (liftEff)
-import Control.Monad.Eff.Uncurried (EffFn2, EffFn3, mkEffFn3, runEffFn2)
 import Data.Either (Either(..))
-import Data.Foreign (Foreign, toForeign)
 import Data.Maybe (Maybe(..))
 import Data.Nullable (Nullable, toNullable)
+import Effect.Aff (Aff, Error, Fiber, attempt, launchAff)
+import Effect.Class (liftEffect)
+import Effect.Uncurried (EffectFn2, EffectFn3, mkEffectFn3, runEffectFn2)
+import Foreign (Foreign, unsafeToForeign)
 
 -- | Converts a curried function to produce an
 -- | uncurried function of the form expected by
@@ -33,14 +33,14 @@ import Data.Nullable (Nullable, toNullable)
 -- |   return callback(null, "Return this string")
 -- | }
 -- | ```
-makeHandler :: forall eff. (Foreign → Foreign → (Aff eff Foreign)) → Handler eff
-makeHandler fn = mkEffFn3 fn'
+makeHandler :: (Foreign → Foreign → (Aff Foreign)) → Handler
+makeHandler fn = mkEffectFn3 fn'
   where
     fn' event ctx callback = launchAff do
       result <- attempt (fn event ctx)
       case result of
-        Left err → liftEff $ runEffFn2 callback (toNullable (Just err)) (toForeign (toNullable Nothing))
-        Right val → liftEff $ runEffFn2 callback (toNullable Nothing) val
+        Left err → liftEffect $ runEffectFn2 callback (toNullable (Just err)) (unsafeToForeign (toNullable Nothing))
+        Right val → liftEffect $ runEffectFn2 callback (toNullable Nothing) val
       pure unit
 
-type Handler eff = EffFn3 eff Foreign Foreign (EffFn2 eff (Nullable Error) Foreign Unit) (Fiber eff Unit)
+type Handler = EffectFn3 Foreign Foreign (EffectFn2 (Nullable Error) Foreign Unit) (Fiber Unit)

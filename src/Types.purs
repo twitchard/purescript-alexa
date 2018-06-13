@@ -19,13 +19,13 @@ module Amazon.Alexa.Types
 
 import Prelude
 
-import Data.Foreign (Foreign, ForeignError(..), F, fail)
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Eq (genericEq)
 import Data.Generic.Rep.Show (genericShow)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype)
-import Simple.JSON (class ReadForeign, class WriteForeign, read, write)
+import Foreign (Foreign, ForeignError(..), F, fail)
+import Simple.JSON (class ReadForeign, class WriteForeign, read', write)
 
 type AlexaSession =
   { new :: Boolean
@@ -88,13 +88,13 @@ data AlexaRequest
       }
 
 instance rfAlexaRequest :: ReadForeign AlexaRequest where
-  readImpl f = read f >>= readByType f
+  readImpl f = read' f >>= readByType f
     where
       readByType :: Foreign → {request :: {type :: String}} → F AlexaRequest
       readByType f' event
-        | event.request.type == "LaunchRequest"       = (map LaunchRequest) $ read f'
-        | event.request.type == "IntentRequest"       = (map IntentRequest) $ read f'
-        | event.request.type == "SessionEndedRequest" = (map SessionEndedRequest) $ read f'
+        | event.request.type == "LaunchRequest"       = (map LaunchRequest) $ read' f'
+        | event.request.type == "IntentRequest"       = (map IntentRequest) $ read' f'
+        | event.request.type == "SessionEndedRequest" = (map SessionEndedRequest) $ read' f'
         | otherwise = fail <<< ForeignError $ "Unknown type " <> event.request.type
 
 type AlexaLaunchRequest =
