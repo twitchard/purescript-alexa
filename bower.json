@@ -1,0 +1,23 @@
+{
+  "name": "purescript-alexa",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-aff": "^5.0.0",
+    "purescript-console": "^4.1.0",
+    "purescript-generics-rep": "^6.0.0",
+    "purescript-prelude": "^4.0.1",
+    "purescript-profunctor-lenses": "^4.0.0",
+    "purescript-simple-json": "^4.0.0"
+  },
+  "devDependencies": {},
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twitchard/purescript-alexa.git"
+  }
+}

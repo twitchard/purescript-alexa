@@ -8,7 +8,6 @@
     "generics-rep",
     "prelude",
     "profunctor-lenses",
-    "simple-json",
-    "prelude"
+    "simple-json"
   ]
 }
