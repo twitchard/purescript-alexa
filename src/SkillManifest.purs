@@ -1,6 +1,5 @@
 module Amazon.Alexa.Manifest where
 
-import Data.Array.NonEmpty (NonEmptyArray)
 import Data.Maybe (Maybe)
 import Foreign.Object (Object)
 
@@ -29,7 +28,7 @@ type Manifest =
       , locales :: Object LocalePrivacy
       }
     , events :: Maybe { endpoint :: Endpoint }
-    , subscriptions :: Maybe (NonEmptyArray Subscription)
+    , subscriptions :: Maybe (Array Subscription)
     , regions :: Maybe (Object Endpoint)
     }
   }
